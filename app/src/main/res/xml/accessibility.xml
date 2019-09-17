@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    其中 description 为 用户允许应用的辅助功能的说明字符串，这里没有指定所要辅助的应用packageNames，当没有指定时，默认辅助所有的应用，
+    建议大家在使用时，指定需要监听的包名（你可以通过|来进行分隔），而不是所有的包名。
+    typeAllMask是设置响应事件的类型，
+    feedbackGeneric是设置回馈给用户的方式，有语音播出和振动。
+-->
+<accessibility-service
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:canPerformGestures="true"
+        android:accessibilityEventTypes="typeAllMask"
+        android:description="@string/alipay"
+        android:accessibilityFeedbackType="feedbackGeneric"
+        android:canRetrieveWindowContent="true"
+        android:notificationTimeout="1000"/>

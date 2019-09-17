@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_set_collect"
+        android:drawableRight="@mipmap/arrow_right"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="收能量设置"
+        android:textColor="#FF34384A"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/view_1"
+        android:background="#BDBDBD"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_set_collect"/>
+
+
+    <TextView
+        android:id="@+id/tv_up_log"
+        android:drawableRight="@mipmap/arrow_right"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="导出日志"
+        android:textColor="#FF34384A"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_1"/>
+
+
+    <View
+        android:id="@+id/view_2"
+        android:background="#BDBDBD"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_up_log"/>
+
+
+    <TextView
+        android:id="@+id/tv_test_other"
+        android:drawableRight="@mipmap/arrow_right"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="设置相关"
+        android:textColor="#FF34384A"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_2"/>
+
+
+    <View
+        android:id="@+id/view_3"
+        android:background="#BDBDBD"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_test_other"/>
+
+    <Button
+        android:id="@+id/bt_start_alarm"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:text="开启定时器"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_3"/>
+
+    <Button
+        android:id="@+id/bt_start_test"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:text="Test"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/bt_start_alarm"
+        />
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_width="wrap_content"
+        android:text="@string/abs_dec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

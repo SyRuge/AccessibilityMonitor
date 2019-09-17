@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".activity.StartAbsActivity">
+
+
+    <TextView
+        android:id="@+id/tv_start_abs"
+        android:drawableRight="@mipmap/arrow_right"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="开启辅助模式"
+        android:textColor="#FF34384A"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <View
+        android:id="@+id/view_1"
+        android:background="#BDBDBD"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_abs"/>
+
+
+    <TextView
+        android:id="@+id/tv_input_passwd"
+        android:drawableRight="@mipmap/arrow_right"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="输入锁屏密码"
+        android:textColor="#FF34384A"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_abs"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <View
+        android:id="@+id/view_2"
+        android:background="#BDBDBD"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_input_passwd"/>
+
+
+    <TextView
+        android:id="@+id/tv_time_range_dec"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:text="请选择起止时间"
+        android:textColor="#FF404040"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_2"/>
+
+
+    <TextView
+        android:id="@+id/tv_start_time"
+        android:background="@drawable/tv_choose_time_shape"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:text="05:30"
+        android:textColor="#FF404040"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_range_line"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_range_dec"
+        />
+
+    <TextView
+        android:id="@+id/tv_range_line"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="---"
+        app:layout_constraintBottom_toBottomOf="@id/tv_start_time"
+        app:layout_constraintLeft_toRightOf="@id/tv_start_time"
+        app:layout_constraintRight_toLeftOf="@id/tv_end_time"
+        app:layout_constraintTop_toTopOf="@id/tv_start_time"/>
+
+
+    <TextView
+        android:id="@+id/tv_end_time"
+        android:background="@drawable/tv_choose_time_shape"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:text="9:00"
+        android:textColor="#FF404040"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_range_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_range_dec"
+        />
+
+    <TextView
+        android:id="@+id/tv_time_repeat_dec"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:text="轮询间隔"
+        android:textColor="#FF404040"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_time"/>
+
+
+    <TextView
+        android:id="@+id/tv_normal_repeat_dec"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:text="正常轮询间隔"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_start_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_repeat_dec"/>
+
+
+    <TextView
+        android:id="@+id/tv_normal_repeat"
+        android:background="@drawable/tv_choose_time_shape"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:text="10分钟"
+        android:textColor="#FF404040"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_start_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_normal_repeat_dec"
+        />
+
+    <TextView
+        android:id="@+id/tv_special_repeat_dec"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:text="特殊轮询间隔(6:30~8:30)"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_repeat_dec"/>
+
+
+    <TextView
+        android:id="@+id/tv_special_repeat"
+        android:background="@drawable/tv_choose_time_shape"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:text="5分钟"
+        android:textColor="#FF404040"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_end_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_special_repeat_dec"
+        />
+
+    <TextView
+        android:id="@+id/tv_start_collect"
+        android:background="@drawable/tv_common_ok_shape"
+        android:gravity="center"
+        android:layout_height="48dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:text="开启定时收能量"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

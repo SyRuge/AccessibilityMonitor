@@ -6,23 +6,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.xcx.accessibilitymonitor.MyApp
 import com.xcx.accessibilitymonitor.R
 import com.xcx.accessibilitymonitor.service.MyAccessibility
 import com.xcx.accessibilitymonitor.utils.*
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * Create By Ruge at 2019-04-16
  */
-var alipayDisp: Disposable? = null
+
+private val TAG = "RepeatJobManager"
 
 fun startCollectEnergy(context: Context) {
     /**
@@ -33,8 +31,11 @@ fun startCollectEnergy(context: Context) {
     if (c.get(Calendar.HOUR_OF_DAY) in getStartTimeHour()..getEndTimeHour()) {
         repeatAlarm(context)
     }
-    unlockScreen()
-    waitToAliPay()
+    MainScope().launch {
+        unlockScreen()
+        delay(1700)
+        isNeedToGoAliPay()
+    }
 
 }
 
@@ -47,7 +48,7 @@ private fun repeatAlarm(context: Context) {
     if (hour == getEndTimeHour() && min >= 45) {
         startDayRepeatAlarm(context)
         //写日志到文件
-        writeLogToFile(context.getString(R.string.log_name), MyApp.sb.toString())
+        writeLogToFile(context.getString(R.string.log_name), MyApp.getLog())
     } else {
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -59,7 +60,7 @@ private fun repeatAlarm(context: Context) {
         }
         val pi = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
         am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi)//开启提醒
-        MyApp.sb.append("${DateUtils.getFormatDate()} 设置重复闹钟 \r\n")
+        MyApp.appendLog("${DateUtils.getFormatDate()} 设置重复闹钟 \r\n")
 
     }
 
@@ -82,33 +83,20 @@ private fun startDayRepeatAlarm(context: Context) {
     }
     val pi = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
     am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextDay, pi)//开启提醒
-    MyApp.sb.append("${DateUtils.getFormatDate()} 设置明天的闹钟 \r\n")
+    MyApp.appendLog("${DateUtils.getFormatDate()} 设置明天的闹钟 \r\n")
 }
 
-fun waitToAliPay() {
-    alipayDisp = Observable.timer(1500, TimeUnit.MILLISECONDS, Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
-        .subscribe {
-            isNeedToGoAliPay()
-        }
-}
 
 fun isNeedToGoAliPay() {
-    alipayDisp?.apply {
-        if (!isDisposed) {
-            dispose()
-            alipayDisp = null
-        }
-    }
     var curHour = DateUtils.getCurrentHour()
     if (curHour in getStartTimeHour()..getEndTimeHour()) {
-        MyApp.sb.append("${DateUtils.getFormatDate()}  startToAliPay \r\n")
-        Log.e("xyjk", "startToAliPay")
+        MyApp.appendLog("${DateUtils.getFormatDate()}  startToAliPay \r\n")
+        loge(TAG, "startToAliPay")
         startAliPay()
 //            repeatAlarm()
     } else {
-        Log.e("xyjk", "不在时间段内解锁呢: ")
-        MyApp.sb.append("${DateUtils.getFormatDate()} 不在时间段内解锁呢 \r\n")
+        loge(TAG, "不在时间段内解锁呢: ")
+        MyApp.appendLog("${DateUtils.getFormatDate()} 不在时间段内解锁呢 \r\n")
     }
 }
 

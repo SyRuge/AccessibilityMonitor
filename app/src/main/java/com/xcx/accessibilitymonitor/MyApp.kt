@@ -10,21 +10,42 @@ import kotlin.properties.Delegates
  */
 class MyApp : Application() {
 
+
     companion object {
+        private var isStopLog = false
+
         @JvmStatic
         var myApp: MyApp by Delegates.notNull()
         @JvmStatic
         var appContext: Context by Delegates.notNull()
         var runtime = Runtime.getRuntime()
-        val sb = StringBuilder()
-        val unlockLog = StringBuilder()
+        private val sb = StringBuilder()
+
+        fun appendLog(content: String) {
+            if (isStopLog){
+                return
+            }
+            sb.append(content)
+        }
+
+        fun getLog() = sb.toString()
+
+        fun startLog(){
+            isStopLog = false
+        }
+
+        fun stopLog(){
+            sb.setLength(0)
+            isStopLog = true
+        }
+
     }
 
     override fun onCreate() {
         super.onCreate()
         myApp = this
         appContext = applicationContext
-        if (LeakCanary.isInAnalyzerProcess(this)){
+        if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return

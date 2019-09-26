@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
@@ -121,7 +120,7 @@ class StartAbsActivity : AppCompatActivity(), View.OnClickListener {
                 setAlarmRepeatJob(true)
             }
             R.id.tv_end_time -> {
-                setAlarmRepeatJob(false, 9, 0)
+                setAlarmRepeatJob(false, 8, 0)
             }
             R.id.tv_normal_repeat -> {
                 pvCustomOptions.show()
@@ -156,7 +155,7 @@ class StartAbsActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startDelayedJob(hourOfDay: Int, minute: Int) {
         startTestAlarm(this, hourOfDay, minute)
-        Log.e("xyjk", "test show notify")
+        logd("StartAbsActivity", "test show notify")
     }
 
 }

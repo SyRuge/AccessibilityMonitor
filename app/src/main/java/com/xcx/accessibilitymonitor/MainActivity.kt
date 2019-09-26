@@ -10,13 +10,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.xcx.accessibilitymonitor.activity.StartAbsActivity
 import com.xcx.accessibilitymonitor.presenter.isNeedToGoAliPay
 import com.xcx.accessibilitymonitor.presenter.startFirstAlarm
 import com.xcx.accessibilitymonitor.presenter.startTestAlarm
+import com.xcx.accessibilitymonitor.utils.logd
 import com.xcx.accessibilitymonitor.utils.writeLogToFile
 import com.xcx.rxpermission.RxPermission
 import io.reactivex.disposables.Disposable
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .subscribe {
                             for (p in it) {
                                 if (p == PackageManager.PERMISSION_GRANTED) {
-                                    writeLogToFile(getString(R.string.log_name), MyApp.sb.toString())
+                                    writeLogToFile(getString(R.string.log_name), MyApp.getLog())
                                 } else {
                                     Toast.makeText(applicationContext, "权限拒绝呢", Toast.LENGTH_SHORT).show()
                                 }
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startDelayedJob(hourOfDay: Int, minute: Int) {
         startTestAlarm(this, hourOfDay, minute)
-        Log.e("xyjk", "test show notify")
+        logd("MainActivity", "test show notify")
     }
 
 

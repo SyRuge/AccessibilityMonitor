@@ -3,6 +3,6 @@
     <string name="alipay">蚂蚁森林自动收能量</string>
     <string name="collect_energy_action">com.xcx.collectenergy</string>
     <string name="wake_lock_tag">com.xyjk</string>
-    <string name="log_name">xcx_log</string>
+    <string name="log_name">forest_log</string>
     <string name="abs_dec">1.开启辅助模式\n2.设置应用自启\n3.应用加锁，防止应用被杀\n4.关闭省点模式\n5.请在充电情况下使用</string>
 </resources>

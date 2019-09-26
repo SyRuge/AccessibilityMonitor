@@ -1,6 +1,5 @@
 package com.xcx.accessibilitymonitor.utils
 
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -8,7 +7,6 @@ import java.util.*
  * Create By Ruge at 2019-03-31
  */
 class DateUtils {
-
 
     companion object {
 
@@ -18,7 +16,7 @@ class DateUtils {
         }
 
         val startDate="5:00"
-        val endDate="9:00"
+        val endDate="8:00"
 
         fun compareCurrentTime(){
             val format=SimpleDateFormat("HH:mm:ss")
@@ -34,13 +32,13 @@ class DateUtils {
 
             val format=SimpleDateFormat("HH:mm:ss")
 
-            val parse = format.parse("9:00:00")
+            val parse = format.parse("8:00:00")
 
             val calendar=Calendar.getInstance()
             val hd = calendar.get(Calendar.HOUR_OF_DAY)
             val h = calendar.get(Calendar.HOUR)
 
-            Log.d("xcx", "strToDate: $hd $h")
+            logd("xcx", "strToDate: $hd $h")
 
             return parse.time
 

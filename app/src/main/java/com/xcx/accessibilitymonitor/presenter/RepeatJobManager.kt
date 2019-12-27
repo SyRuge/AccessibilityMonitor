@@ -52,7 +52,11 @@ private fun repeatAlarm(context: Context) {
     } else {
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val anHour = 10 * 60 * 1000   // 10分钟唤醒一次
+        var anHour = 10 * 60 * 1000   // 10分钟唤醒一次
+        // 7~8点特殊轮询唤醒时间
+        if (hour == 7) {
+            anHour = 5 * 60 * 1000
+        }
         val triggerAtTime = SystemClock.elapsedRealtime() + anHour
 
         val intent = Intent(context, MyAccessibility::class.java).apply {
@@ -105,12 +109,16 @@ fun isNeedToGoAliPay() {
  * adb shell am start com.eg.android.AlipayGphone/com.eg.android.AlipayGphone.AlipayLogin
  */
 fun startAliPay() {
-    val intent = Intent().apply {
+    /*val intent = Intent().apply {
         setPackage("com.eg.android.AlipayGphone")
         setClassName("com.eg.android.AlipayGphone", "com.eg.android.AlipayGphone.AlipayLogin")
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
-    MyApp.appContext.startActivity(intent)
+    MyApp.appContext.startActivity(intent)*/
+    val commands = mutableListOf<String>()
+    commands.clear()
+    commands.add("am start -S com.eg.android.AlipayGphone/.AlipayLogin")
+    execShell(commands)
 }
 
 fun startFirstAlarm() {

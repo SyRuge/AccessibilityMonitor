@@ -31,6 +31,7 @@ class MyAccessibility : AccessibilityService() {
     val ALIPAY_PACKAGENAME = "com.eg.android.AlipayGphone"
     val ALIPAY_LOGIN = "com.eg.android.AlipayGphone.AlipayLogin"
     val ALIPAY_FOREST = "com.alipay.mobile.nebulax.integration.mpaas.activity.NebulaActivity\$Main"
+    val ALIPAY_H5 = "nebula"
     val UC_WEBKIT = "com.uc.webkit.be"
     val ALIPAY_WEBVIEW = "com.uc.webview.export.WebView"
 
@@ -86,7 +87,9 @@ class MyAccessibility : AccessibilityService() {
 
             gotoH5Activity(packageName, className)
 
-            if (packageName == ALIPAY_PACKAGENAME && (className == ALIPAY_FOREST || className == UC_WEBKIT)) {
+            logd(TAG,"$packageName $className")
+
+            if (packageName == ALIPAY_PACKAGENAME && (className.contains(ALIPAY_H5) || className == UC_WEBKIT)) {
                 scope.launch {
                     delay(3 * 1000)
                     var nodeInfo = rootInActiveWindow
@@ -141,12 +144,6 @@ class MyAccessibility : AccessibilityService() {
                     "${DateUtils.getFormatDate()} Button 的节点数据: text = ${child.text}, " +
                             "descript = ${child.contentDescription}, className = ${child.className}, \r\n"
                 )
-
-                /**
-                 * 好友的能量不能收取，因为支付宝在onTouch事件中return true,导致不会触发OnClick方法
-                 * todo 第二版准备把偷能量加上
-                 * 但是支付宝中的蚂蚁森林可以收取自己的能量
-                 */
 
                 var dec = child.contentDescription
                 var text = child.text
@@ -241,21 +238,27 @@ class MyAccessibility : AccessibilityService() {
 
     private fun gotoH5Activity(packageName: String, className: String) {
 
-        if (packageName == ALIPAY_PACKAGENAME && className == ALIPAY_LOGIN) {
-            MyApp.appendLog("${DateUtils.getFormatDate()}  gotoH5Activity \r\n")
-            logd(TAG, "gotoH5Activity")
-            rootInActiveWindow?.apply {
-                val nodeInfos = findAccessibilityNodeInfosByText("蚂蚁森林")
-                nodeInfos?.also {
-                    for (node in it) {
-                        var parent = node.parent
-                        if (parent != null && parent.isClickable) {
-                            parent.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-                            break
+        logd(TAG, "gotoH5Activity")
+
+        scope.launch {
+            delay(1500)
+            if (packageName == ALIPAY_PACKAGENAME && className == ALIPAY_LOGIN) {
+                MyApp.appendLog("${DateUtils.getFormatDate()}  gotoH5Activity \r\n")
+                logd(TAG, "gotoH5Activity start")
+                rootInActiveWindow?.apply {
+                    val nodeInfos = findAccessibilityNodeInfosByText("蚂蚁森林")
+                    nodeInfos?.also {
+                        for (node in it) {
+                            var parent = node.parent
+                            if (parent != null && parent.isClickable) {
+                                parent.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                                break
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 }

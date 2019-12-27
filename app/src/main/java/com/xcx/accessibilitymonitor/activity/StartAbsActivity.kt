@@ -72,7 +72,6 @@ class StartAbsActivity : AppCompatActivity(), View.OnClickListener {
         tv_start_time.setOnClickListener(this)
         tv_end_time.setOnClickListener(this)
         tv_normal_repeat.setOnClickListener(this)
-        tv_start_collect.setOnClickListener(this)
         tv_input_passwd.setOnClickListener(this)
     }
 
@@ -124,13 +123,6 @@ class StartAbsActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.tv_normal_repeat -> {
                 pvCustomOptions.show()
-            }
-            R.id.tv_start_collect -> {
-//                presenter.startFirstAlarm(this)
-//                startFirstAlarm(this)
-//                startTestAlarm()
-//                finish()
-                testJobIsOk()
             }
             R.id.tv_input_passwd -> {
                 CustomDialog().show(supportFragmentManager, "xyjk")

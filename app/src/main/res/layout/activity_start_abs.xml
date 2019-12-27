@@ -209,21 +209,5 @@
         app:layout_constraintTop_toBottomOf="@id/tv_special_repeat_dec"
         />
 
-    <TextView
-        android:id="@+id/tv_start_collect"
-        android:background="@drawable/tv_common_ok_shape"
-        android:gravity="center"
-        android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:text="开启定时收能量"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
 
 </android.support.constraint.ConstraintLayout>

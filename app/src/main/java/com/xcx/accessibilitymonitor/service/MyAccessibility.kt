@@ -12,10 +12,7 @@ import com.xcx.accessibilitymonitor.MyApp
 import com.xcx.accessibilitymonitor.R
 import com.xcx.accessibilitymonitor.presenter.startCollectEnergy
 import com.xcx.accessibilitymonitor.utils.*
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 /**
@@ -34,6 +31,7 @@ class MyAccessibility : AccessibilityService() {
     val ALIPAY_H5 = "nebula"
     val UC_WEBKIT = "com.uc.webkit.be"
     val ALIPAY_WEBVIEW = "com.uc.webview.export.WebView"
+    var activityJob: Job? = null
 
 
     override fun onInterrupt() {
@@ -102,6 +100,7 @@ class MyAccessibility : AccessibilityService() {
                             if (ALIPAY_WEBVIEW == child.className) {
                                 loge(TAG, "找到蚂蚁森林的 webView count = " + child.childCount)
 //                                        collectFriendEnergy(child)
+                                delay(1 * 1500)
                                 findEveryViewNode(child)
                                 break
                             }
@@ -239,26 +238,48 @@ class MyAccessibility : AccessibilityService() {
     private fun gotoH5Activity(packageName: String, className: String) {
 
         logd(TAG, "gotoH5Activity")
+        if (packageName != ALIPAY_PACKAGENAME) {
+            return
+        }
 
-        scope.launch {
-            delay(1500)
-            if (packageName == ALIPAY_PACKAGENAME && className == ALIPAY_LOGIN) {
-                MyApp.appendLog("${DateUtils.getFormatDate()}  gotoH5Activity \r\n")
+        var antForest = rootInActiveWindow?.
+            findAccessibilityNodeInfosByText("蚂蚁森林")
+
+        var myMicroApp = rootInActiveWindow?.
+            findAccessibilityNodeInfosByText("我的小程序")
+
+        if (antForest.isNullOrEmpty() || myMicroApp.isNullOrEmpty()) {
+            logd(TAG, "antForest or myMicroApp is empty, no need to H5Activity")
+            return
+        }
+
+        try {
+            if (activityJob != null && activityJob!!.isActive) {
+                return
+            }
+            logd(TAG, "gotoH5Activity launch")
+            activityJob = scope.launch {
+                delay(1300)
+                MyApp.appendLog("${DateUtils.getFormatDate()} gotoH5Activity \r\n")
                 logd(TAG, "gotoH5Activity start")
-                rootInActiveWindow?.apply {
-                    val nodeInfos = findAccessibilityNodeInfosByText("蚂蚁森林")
-                    nodeInfos?.also {
-                        for (node in it) {
-                            var parent = node.parent
-                            if (parent != null && parent.isClickable) {
-                                parent.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-                                break
-                            }
+                antForest = rootInActiveWindow?.findAccessibilityNodeInfosByText("蚂蚁森林")
+                antForest?.also {
+                    for (node in it) {
+                        val parent = node.parent
+                        if (parent != null && parent.isClickable) {
+                            parent.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                            break
                         }
                     }
                 }
             }
+        } catch (e: Exception) {
+            loge(TAG, "activityJob Exception: ", e)
         }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 }

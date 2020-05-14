@@ -2,7 +2,6 @@ package com.xcx.accessibilitymonitor
 
 import android.app.Application
 import android.content.Context
-import com.squareup.leakcanary.LeakCanary
 import kotlin.properties.Delegates
 
 /**
@@ -45,11 +44,5 @@ class MyApp : Application() {
         super.onCreate()
         myApp = this
         appContext = applicationContext
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return
-        }
-        LeakCanary.install(this)
     }
 }

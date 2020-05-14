@@ -42,7 +42,7 @@ fun writeLogToFile(fileName: String, content: String) {
 }
 
 private fun execWrite(content: String, fileName: String): Boolean {
-    var path = Environment.getExternalStorageDirectory().absolutePath + "/xcx"
+    var path = MyApp.appContext.externalCacheDir.path
 
     var out: FileOutputStream? = null
     try {
